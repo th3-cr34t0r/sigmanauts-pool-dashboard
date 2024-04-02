@@ -1,0 +1,46 @@
+body {
+    background-color: #31363F;
+}
+
+/*********** NAVBAR ************/
+.navbar {
+    justify-content: center;
+    background: #222831
+}
+.nav-link {
+    color: #EEEEEE;
+}
+.nav-link:hover {
+    color: #76ABAE;
+}
+
+/*********** END OF NAVBAR ************/
+
+/*********** MAIN ************/
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.row {
+    justify-content: center;
+}
+
+.form-inline {
+    max-width: 600px;
+}
+
+.card {
+    color: #EEEEEE;
+    background-color: #222831;
+
+    border-color: #76ABAE;
+    border-width: 1px;
+
+    max-width: 25rem;
+    max-height: 100rem;
+    margin: 20px;
+}
+/*********** END OF MAIN ************/
