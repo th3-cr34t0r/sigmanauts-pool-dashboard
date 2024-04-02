@@ -18,10 +18,10 @@
                     </p>
                     <h5 class="card-title">Pool Info</h5>
                     <p>
-                        Payout scheme: PPLNS <br>
-                        Minimum payment threshold: 0.1 ERG <br>
-                        Pool fee: #% <br>
-                        Pool address: # <br>
+                        Payout scheme: {{ payout_scheme }} <br>
+                        Minimum payment threshold: {{ payment_threshold }} ERG <br>
+                        Pool fee: {{ pool_fee }}% <br>
+                        Pool address: {{ pool_address }} <br>
                     </p>
                 </div>
             </div>
@@ -29,10 +29,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Network Stats</h5>
                     <p class="card-text">
-                        Network hash-rate: # Gh/s <br>
-                        Network difficulty: # P <br>
-                        Block height: # <br>
-                        Last network block time: # s <br>
+                        Network hash-rate: {{ network_hashrate }} Th/s <br>
+                        Network difficulty: {{ network_difficulty }} P <br>
+                        Block height: {{ network_block_height }} <br>
+                        Last network block time: {{ network_last_block_time }} <br>
                     </p>
                 </div>
             </div>

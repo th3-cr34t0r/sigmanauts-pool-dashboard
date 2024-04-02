@@ -1,6 +1,7 @@
 from datetime import datetime
 import requests
 
+
 class GetPoolData:
     def __init__(self):
         self.base_api = "https://api.npoint.io/4dee266f5d8ed29ff27d/pool"
@@ -35,7 +36,8 @@ class GetPoolData:
 
         elif arg == "lastPoolBlockTime":
             time_str = data
-            time_obj = datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%S.%fZ')
+            time_obj = time_str[:26] + 'Z'  # Truncate to 6 digits for microseconds
+            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%fZ')
             data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
         return data
@@ -51,5 +53,38 @@ class GetPoolData:
         # Hashes to Gigahashes
         if arg == "poolHashrate":
             data = str(round((int(data) / 1000000000), 3))
+
+        return data
+
+    def get_payment_processing(self, arg: str):
+        # enabled
+        # payoutScheme
+        # minimumPayment
+        url = '{}/{}/{}'.format(self.base_api, 'paymentProcessing', arg)
+        data = self.get_api_data(url)
+
+        return data
+
+    def get_network_stats(self, arg: str):
+        # blockHeight
+        # networkHashrate
+        # networkDifficulty
+        # lastNetworkBlockTime
+        url = '{}/{}/{}'.format(self.base_api, 'networkStats', arg)
+        data = self.get_api_data(url)
+
+        # Hashes to Terahashes
+        if arg == 'networkHashrate':
+            data = str(round(float(data) / 1000000000000, 3))
+
+        # to Peta
+        elif arg == 'networkDifficulty':
+            data = str(round(float(data) / 1000000000000000, 3))
+
+        elif arg == 'lastNetworkBlockTime':
+            time_str = data
+            time_obj = time_str[:26] + 'Z'  # Truncate to 6 digits for microseconds
+            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%fZ')
+            data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
         return data
