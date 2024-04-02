@@ -1,17 +1,13 @@
-body {
-    background-color: #31363F;
-}
-
 /*********** NAVBAR ************/
 .navbar {
     justify-content: center;
-    background: #222831
+    background: rgba(74, 63, 53, 0.7);
 }
 .nav-link {
     color: #EEEEEE;
 }
 .nav-link:hover {
-    color: #76ABAE;
+    color: #FA7D09;
 }
 
 /*********** END OF NAVBAR ************/
@@ -34,9 +30,9 @@ body {
 
 .card {
     color: #EEEEEE;
-    background-color: #222831;
+    background-color: rgba(47, 37, 25, 0.5);
 
-    border-color: #76ABAE;
+    border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
     max-width: 35rem;
@@ -44,3 +40,12 @@ body {
     margin: 20px;
 }
 /*********** END OF MAIN ************/
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
