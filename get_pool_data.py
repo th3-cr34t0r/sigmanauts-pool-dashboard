@@ -1,10 +1,10 @@
-from datetime import datetime
 import requests
+from datetime import datetime
 
 
 class GetPoolData:
     def __init__(self):
-        self.base_api = "https://api.npoint.io/4dee266f5d8ed29ff27d/pool"
+        self.base_api = "http://15.204.211.130:4000/api/pools/ErgoSigmanauts"
 
     def get_api_data(self, api_url):
         data = requests.get(url=api_url)
@@ -24,8 +24,7 @@ class GetPoolData:
         # blockRefreshInterval
         # jobRebroadcastTimeout
         # clientConnectionTimeout
-        url = '{}/{}'.format(self.base_api, arg)
-        data = self.get_api_data(url)
+        data = self.get_api_data(self.base_api)['pool'][f'{arg}']
 
         # Round totalPaid
         if arg == "totalPaid":
@@ -47,8 +46,7 @@ class GetPoolData:
         # poolHashrate
         # connectedMiners
         # sharesPerSecond
-        url = '{}/{}/{}'.format(self.base_api, 'poolStats', arg)
-        data = self.get_api_data(url)
+        data = self.get_api_data(self.base_api)['pool']['poolStats'][f'{arg}']
 
         # Hashes to Gigahashes
         if arg == "poolHashrate":
@@ -60,8 +58,7 @@ class GetPoolData:
         # enabled
         # payoutScheme
         # minimumPayment
-        url = '{}/{}/{}'.format(self.base_api, 'paymentProcessing', arg)
-        data = self.get_api_data(url)
+        data = self.get_api_data(self.base_api)['pool']['paymentProcessing'][f'{arg}']
 
         return data
 
@@ -70,8 +67,7 @@ class GetPoolData:
         # networkHashrate
         # networkDifficulty
         # lastNetworkBlockTime
-        url = '{}/{}/{}'.format(self.base_api, 'networkStats', arg)
-        data = self.get_api_data(url)
+        data = self.get_api_data(self.base_api)['pool']['networkStats'][f'{arg}']
 
         # Hashes to Terahashes
         if arg == 'networkHashrate':

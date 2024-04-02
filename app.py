@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+
 from get_pool_data import GetPoolData
 
 app = Flask(__name__)

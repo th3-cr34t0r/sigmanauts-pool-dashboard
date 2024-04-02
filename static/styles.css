@@ -29,7 +29,7 @@ body {
 }
 
 .form-inline {
-    max-width: 600px;
+    max-width: 50rem;
 }
 
 .card {
@@ -39,7 +39,7 @@ body {
     border-color: #76ABAE;
     border-width: 1px;
 
-    max-width: 25rem;
+    max-width: 35rem;
     max-height: 100rem;
     margin: 20px;
 }

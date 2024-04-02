@@ -7,8 +7,9 @@
         </div>
         <div class="row">
             <div class="card mb-3">
+              <div class="card-header"><h4>Pool Stats</h4></div>
                 <div class="card-body">
-                    <h5 class="card-title">Pool Stats</h5>
+                    <h5 class="card-title"></h5>
                     <p class="card-text">
                         Pool hash-rate: {{ pool_hashrate }} Gh/s <br>
                         Connected miners: {{ connected_miners }} <br>
@@ -19,8 +20,9 @@
                 </div>
             </div>
             <div class="card mb-3">
+              <div class="card-header"><h4>Network Stats</h4></div>
                 <div class="card-body">
-                    <h5 class="card-title">Network Stats</h5>
+                    <h5 class="card-title"></h5>
                     <p class="card-text">
                         Network hash-rate: {{ network_hashrate }} Th/s <br>
                         Network difficulty: {{ network_difficulty }} P <br>
@@ -31,16 +33,34 @@
             </div>
         </div>
         <div class="row">
-            <div class="card-body">
-                    <h5 class="card-title">Pool Info</h5>
+            <div class="card mb-3">
+              <div class="card-header"><h4>Pool Info</h4></div>
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
                     <p>
                         Payout scheme: {{ payout_scheme }} <br>
                         Minimum payment threshold: {{ payment_threshold }} ERG <br>
                         Pool fee: {{ pool_fee }}% <br>
                         Pool address: {{ pool_address }} <br>
                     </p>
+                </div>
+            </div>
+            <div class="card mb-3">
+              <div class="card-header"><h4>How To Connect</h4></div>
+                <div class="card-body">
+                    <h5 class="card-title">Choose a port</h5>
+                    <p class="card-text">
+                        <br>Based on your hashrate and TLS, choose the port that is right for you.<br><br>
+
+                        Port 3052 - Lower than 10GH/s - No TLS<br>
+                        Port 3053 - Higher than 10GH/s - No TLS<br>
+                        Port 3054 - Lower than 10GH/s - TLS<br>
+                        Port 3055 - Higher than 10GH/s - TLS<br><br>
+
+                        Pool URL: <b>pool.ergo-sig-mining.net:PORT</b><br>
+                    </p>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
