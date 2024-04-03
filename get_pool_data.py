@@ -35,8 +35,8 @@ class GetPoolData:
 
         elif arg == "lastPoolBlockTime":
             time_str = data
-            time_obj = time_str[:26] + 'Z'  # Truncate to 6 digits for microseconds
-            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%fZ')
+            time_obj = time_str[:21]
+            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
             data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
         return data
@@ -79,8 +79,8 @@ class GetPoolData:
 
         elif arg == 'lastNetworkBlockTime':
             time_str = data
-            time_obj = time_str[:26] + 'Z'  # Truncate to 6 digits for microseconds
-            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%fZ')
+            time_obj = time_str[:21]
+            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
             data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
         return data
