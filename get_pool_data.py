@@ -1,17 +1,20 @@
 import requests
 from datetime import datetime
 
+base_api = "http://15.204.211.130:4000/api/pools/ErgoSigmanauts"
+
+
+def get_api_data():
+    data = requests.get(url=base_api)
+    data.raise_for_status()
+    return data.json()
+
 
 class GetPoolData:
     def __init__(self):
-        self.base_api = "http://15.204.211.130:4000/api/pools/ErgoSigmanauts"
+        self.id = ""
 
-    def get_api_data(self, api_url):
-        data = requests.get(url=api_url)
-        data.raise_for_status()
-        return data.json()
-
-    def get_stats(self, arg: str):
+    def get_stats(self, data_json, arg: str):
         # VALID ARGS:
         # id
         # address
@@ -24,7 +27,7 @@ class GetPoolData:
         # blockRefreshInterval
         # jobRebroadcastTimeout
         # clientConnectionTimeout
-        data = self.get_api_data(self.base_api)['pool'][f'{arg}']
+        data = data_json['pool'][f'{arg}']
 
         # Round totalPaid
         if arg == "totalPaid":
@@ -41,12 +44,12 @@ class GetPoolData:
 
         return data
 
-    def get_pool_stats(self, arg: str):
+    def get_pool_stats(self, data_json, arg: str):
         # VALID ARGS:
         # poolHashrate
         # connectedMiners
         # sharesPerSecond
-        data = self.get_api_data(self.base_api)['pool']['poolStats'][f'{arg}']
+        data = data_json['pool']['poolStats'][f'{arg}']
 
         # Hashes to Gigahashes
         if arg == "poolHashrate":
@@ -54,20 +57,20 @@ class GetPoolData:
 
         return data
 
-    def get_payment_processing(self, arg: str):
+    def get_payment_processing(self, data_json, arg: str):
         # enabled
         # payoutScheme
         # minimumPayment
-        data = self.get_api_data(self.base_api)['pool']['paymentProcessing'][f'{arg}']
+        data = data_json['pool']['paymentProcessing'][f'{arg}']
 
         return data
 
-    def get_network_stats(self, arg: str):
+    def get_network_stats(self, data_json, arg: str):
         # blockHeight
         # networkHashrate
         # networkDifficulty
         # lastNetworkBlockTime
-        data = self.get_api_data(self.base_api)['pool']['networkStats'][f'{arg}']
+        data = data_json['pool']['networkStats'][f'{arg}']
 
         # Hashes to Terahashes
         if arg == 'networkHashrate':
