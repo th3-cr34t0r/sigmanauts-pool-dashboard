@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-debug = False
+debug = True
 
 if debug:
     @app.route("/", methods=["POST", "GET"])
@@ -33,6 +33,7 @@ else:
     from get_pool_data import GetPoolData, get_api_data
 
     pool_data = GetPoolData()
+
 
     @app.route("/", methods=["POST", "GET"])
     def home():
@@ -71,6 +72,7 @@ def wallet(address):
 @app.route("/faq")
 def faq():
     return render_template("app.html", display_page="faq.html")
+
 
 @app.route("/get-started")
 def get_started():
