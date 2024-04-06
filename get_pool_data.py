@@ -10,6 +10,19 @@ def get_api_data():
     return data.json()
 
 
+def get_miner_data(address=""):
+    if address == "":
+        miner_url = "{}/{}".format(base_api, "miners")
+        miner_data = requests.get(url=miner_url)
+        miner_data.raise_for_status()
+        return miner_data.json()
+    else:
+        miner_url = "{}/{}/{}".format(base_api, "miners", f"{address}")
+        miner_data = requests.get(url=miner_url)
+        miner_data.raise_for_status()
+        return miner_data.json()
+
+
 class GetPoolData:
     def __init__(self):
         self.id = ""
@@ -87,3 +100,52 @@ class GetPoolData:
             data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
         return data
+
+    def get_miner_performance(self, address):
+        miner_data = get_miner_data(address)
+        miner_hashrate = 0
+
+        #         miner_hashrate:
+        for worker in miner_data['performance']['workers']:
+            miner_hashrate += float(miner_data['performance']['workers'][f'{worker}']['hashrate'])
+
+        #       hashrate in Gh/s
+        miner_hashrate = round(miner_hashrate / 1e9, 2)
+
+        #       miner_avg_hashrate:
+        miner_avg_hashrate = "0"
+
+        #       miner_pending_shares:
+        miner_penging_shares = str(round(float(miner_data["pendingShares"]), 2))
+
+        #       miner_pending_balance:
+        miner_pending_balance = str(round(float(miner_data["pendingBalance"]), 2))
+
+        #       miner_total_paid:
+        miner_total_paid = str(round(float(miner_data["totalPaid"]), 2))
+
+        #       pool contribution in %
+        data_json = get_api_data()
+        miner_contribution = round((miner_hashrate / float(self.get_pool_stats(data_json, "poolHashrate")) * 100), 2)
+
+        miner_data_display = {'miner_hashrate': miner_hashrate,
+                              'miner_avg_hashrate': miner_avg_hashrate,
+                              'miner_pending_shares': miner_penging_shares,
+                              'miner_pending_balance': miner_pending_balance,
+                              'miner_total_paid': miner_total_paid,
+                              'miner_contribution': miner_contribution
+                              }
+        return miner_data_display
+
+    def get_wallet_stats(self, address):
+        data = get_miner_data()
+        miner_list = []
+        for sample in data:
+            miner_list.append(sample['miner'])
+
+        for miner in miner_list:
+            if address == miner:
+
+                return self.get_miner_performance(address)
+
+        return "Miner data not available!"

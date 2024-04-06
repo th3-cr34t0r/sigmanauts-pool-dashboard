@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-debug = True
+debug = False
 
 if debug:
     @app.route("/", methods=["POST", "GET"])
@@ -62,21 +62,45 @@ else:
                                                                                        "lastNetworkBlockTime"))
 
 
-@app.route("/wallet/<address>")
-def wallet(address):
-    return render_template("app.html",
-                           display_page="session.html",
-                           address=address)
+    @app.route("/wallet/<address>")
+    def wallet(address):
+        pool_data = GetPoolData()
+
+        data_json = get_api_data()
+        miner_data = pool_data.get_wallet_stats(address)
+
+        if miner_data != "Miner data not available!":
+            return render_template("app.html",
+                                   display_page="session.html",
+                                   miner_address=address,
+                                   network_hashrate=pool_data.get_network_stats(data_json, "networkHashrate"),
+                                   network_difficulty=pool_data.get_network_stats(data_json, "networkDifficulty"),
+                                   block_reward="30 ERG TBI",
+                                   block_reduction_time="TBI",
+                                   pool_hashrate=pool_data.get_pool_stats(data_json, "poolHashrate"),
+                                   pool_miners=pool_data.get_pool_stats(data_json, "connectedMiners"),
+                                   block_found_time="TBI",
+                                   pool_effort=pool_data.get_stats(data_json, "poolEffort"),
+                                   miner_hashrate=miner_data["miner_hashrate"],
+                                   miner_avg_hashrate=miner_data["miner_avg_hashrate"],
+                                   miner_pending_shares=miner_data["miner_pending_shares"],
+                                   miner_pending_balance=miner_data["miner_pending_balance"],
+                                   miner_total_paid=miner_data["miner_total_paid"],
+                                   miner_contribution=miner_data["miner_contribution"]
+
+                                   )
+        else:
+            return redirect(url_for("home"))
 
 
-@app.route("/faq")
-def faq():
-    return render_template("app.html", display_page="faq.html")
+    @app.route("/faq")
+    def faq():
+        return render_template("app.html", display_page="faq.html")
 
 
-@app.route("/get-started")
-def get_started():
-    return render_template("app.html", display_page="get-started.html")
+    @app.route("/get-started")
+    def get_started():
+        return render_template("app.html", display_page="get-started.html")
 
 
 if __name__ == "__main__":

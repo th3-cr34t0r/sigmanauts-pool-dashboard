@@ -7,49 +7,78 @@
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>{{ address }}</p>
+                        <p>{{ miner_address }}</p>
                     </blockquote>
                 </div>
             </div>
         </div>
+        <!--        Network-Pool Stats Row-->
         <div class="row">
-            <div class="card">
+            <div class="card-stats">
+                <div class="card-header">
+                    Network Stats
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Hashrate: {{ network_hashrate }} Th/s</p>
+                        <p>Difficulty: {{ network_difficulty }} P</p>
+                        <p>Block Reward: {{ block_reward }}</p>
+                        <p>Block Reward reduction in: {{ block_reduction_time }}</p>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="card-stats">
                 <div class="card-header">
                     Pool Stats
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>Hashrate:        TTF:        Effort:</p>
-                        <p> 17GHs           1           25%</p>
+                        <p>Hashrate: {{ pool_hashrate }} Gh/s</p>
+                        <p>Connected Miners: {{ pool_miners }}</p>
+                        <p>Block found every: {{ block_found_time }}</p>
+                        <p>Current Effort: {{ pool_effort }} %</p>
                     </blockquote>
                 </div>
             </div>
-            <div class="card">
+            <div class="card-stats">
                 <div class="card-header">
-                    {{ address }}
+                    Ergo News
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>A well-known quote, contained in a blockquote element.</p>
-                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
-                            Title</cite></footer>
+                        <p>RosenBridge connecting Bitcoin to Cardano through Ergo!</p>
                     </blockquote>
                 </div>
             </div>
         </div>
+        <!--        Miner Info Row-->
         <div class="row">
-            <div class="card">
+            <div class="card-miner">
                 <div class="card-header">
-                    {{ address }}
+                    Miner Info
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>A well-known quote, contained in a blockquote element.</p>
-                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source
-                            Title</cite></footer>
+                        <p>Current Hash Rate: {{ miner_hashrate }} Gh/s</p>
+                        <p>Average 24h Hash Rate: {{ miner_avg_hashrate }}</p>
+                        <p>Pending Shares: {{ miner_pending_shares }}</p>
+                        <p>Pending Balance: {{ miner_pending_balance }} ERG</p>
+                        <p>Total Paid: {{ miner_total_paid }} ERG</p>
+                        <p>Round contribution: {{ miner_contribution }} %</p>
+                    </blockquote>
+                </div>
+            </div>
+            <div class="card-miner">
+                <div class="card-header">
+                    Address Workers
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Worker1:</p>
                     </blockquote>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
