@@ -4,8 +4,11 @@ from datetime import datetime
 base_api = "http://15.204.211.130:4000/api/pools/ErgoSigmanauts"
 
 
-def get_api_data():
-    data = requests.get(url=base_api)
+def get_api_data(url=""):
+    if url == "":
+        url = base_api
+
+    data = requests.get(url=url)
     data.raise_for_status()
     return data.json()
 
@@ -26,6 +29,12 @@ def get_miner_data(address=""):
 class GetPoolData:
     def __init__(self):
         self.id = ""
+
+    def time_format(self, data):
+        time_str = data
+        time_obj = time_str[:21]
+        time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
+        return time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
     def get_stats(self, data_json, arg: str):
         # VALID ARGS:
@@ -50,10 +59,7 @@ class GetPoolData:
             data = str(round(float(data) * 100, 2))
 
         elif arg == "lastPoolBlockTime":
-            time_str = data
-            time_obj = time_str[:21]
-            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
-            data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
+            data = self.time_format(data)
 
         return data
 
@@ -94,10 +100,7 @@ class GetPoolData:
             data = str(round(float(data) / 1000000000000000, 3))
 
         elif arg == 'lastNetworkBlockTime':
-            time_str = data
-            time_obj = time_str[:21]
-            time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
-            data = time_obj.strftime('%Y-%m-%d %H:%M:%S')
+            data = self.time_format(data)
 
         return data
 
@@ -145,7 +148,19 @@ class GetPoolData:
 
         for miner in miner_list:
             if address == miner:
-
                 return self.get_miner_performance(address)
 
         return "Miner data not available!"
+
+    def get_last_block_info(self):
+        url = "{}/{}".format(base_api, 'blocks')
+        block_data = get_api_data(url)
+
+        block_data_display = {'block_status': block_data[0]['status'],
+                              'block_progress': str(round(float(block_data[0]['confirmationProgress']) * 100, 2)),
+                              'block_effort': str(round(float(block_data[0]['effort']) * 100, 2)),
+                              'block_last_reward': block_data[0]['reward'],
+                              'block_miner': (block_data[0]['miner'])[:10] + '...' + (block_data[0]['miner'])[41:],
+                              'block_time': self.time_format(block_data[0]['created'])
+                              }
+        return block_data_display

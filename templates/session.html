@@ -42,11 +42,16 @@
             </div>
             <div class="card-stats">
                 <div class="card-header">
-                    Ergo News
+                    Last Block Info
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>RosenBridge connecting Bitcoin to Cardano through Ergo!</p>
+                        <p>Status: {{ block_status }}</p>
+                        <p>Confirmation progress: {{ block_progress }} %</p>
+                        <p>Effort: {{ block_effort }} %</p>
+                        <p>Block reward: {{ block_last_reward }} ERG</p>
+                        <p>Mined by: {{ block_miner }}</p>
+                        <p>Time of creation: {{ block_time }}</p>
                     </blockquote>
                 </div>
             </div>
@@ -80,5 +85,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

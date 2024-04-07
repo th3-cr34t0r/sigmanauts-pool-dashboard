@@ -21,13 +21,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 20rem;
-    margin-right: 20rem;
 }
 
+.col {
+    max-width: 80rem;
+}
 .row {
     justify-content: center;
 }
+
 
 #search-bar {
     max-width: 74rem;
@@ -133,7 +135,7 @@ body {
     border-width: 1px;
 
     max-width: 26rem;
-    max-height: 20rem;
+    max-height: 21rem;
     margin: 0.5rem;
 }
 

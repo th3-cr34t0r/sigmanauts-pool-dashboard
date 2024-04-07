@@ -68,6 +68,7 @@ else:
 
         data_json = get_api_data()
         miner_data = pool_data.get_wallet_stats(address)
+        block_info = pool_data.get_last_block_info()
 
         if miner_data != "Miner data not available!":
             return render_template("app.html",
@@ -81,13 +82,18 @@ else:
                                    pool_miners=pool_data.get_pool_stats(data_json, "connectedMiners"),
                                    block_found_time="TBI",
                                    pool_effort=pool_data.get_stats(data_json, "poolEffort"),
+                                   block_status=block_info["block_status"],
+                                   block_progress=block_info["block_progress"],
+                                   block_effort=block_info["block_effort"],
+                                   block_last_reward=block_info["block_last_reward"],
+                                   block_miner=block_info["block_miner"],
+                                   block_time=block_info["block_time"],
                                    miner_hashrate=miner_data["miner_hashrate"],
                                    miner_avg_hashrate=miner_data["miner_avg_hashrate"],
                                    miner_pending_shares=miner_data["miner_pending_shares"],
                                    miner_pending_balance=miner_data["miner_pending_balance"],
                                    miner_total_paid=miner_data["miner_total_paid"],
                                    miner_contribution=miner_data["miner_contribution"]
-
                                    )
         else:
             return redirect(url_for("home"))
@@ -101,7 +107,6 @@ else:
     @app.route("/get-started")
     def get_started():
         return render_template("app.html", display_page="get-started.html")
-
 
 if __name__ == "__main__":
     app.run(debug=True)
