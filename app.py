@@ -109,7 +109,4 @@ else:
         return flask.render_template("app.html", display_page="get-started.html")
 
 if __name__ == "__main__":
-    if debug:
-        app.run(debug=True)
-    else:
-        app.run()
+    app.run(debug=True)

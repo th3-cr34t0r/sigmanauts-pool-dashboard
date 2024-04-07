@@ -96,7 +96,7 @@ body {
     border-width: 1px;
 
     min-width: 18rem;
-    max-width: 43rem;
+    max-width: 44rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
@@ -140,6 +140,7 @@ body {
     border-width: 1px;
 
     min-width: 18rem;
+    max-width: 27rem;
     margin: 0.5rem;
 }
 
@@ -182,6 +183,7 @@ body {
     border-width: 1px;
 
     min-width: 18rem;
+    max-width: 41rem;
     margin: 0.5rem;
 }
 /*********** END OF MAIN ************/
