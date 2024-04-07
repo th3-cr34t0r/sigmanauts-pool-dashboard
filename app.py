@@ -67,8 +67,10 @@ else:
         pool_data = GetPoolData()
 
         data_json = get_api_data()
-        miner_data = pool_data.get_wallet_stats(address)
         block_info = pool_data.get_last_block_info()
+        miner_data = pool_data.get_wallet_stats(address)
+        workers_data = pool_data.get_workers_stats(address)
+
 
         if miner_data != "Miner data not available!":
             return flask.render_template("app.html",
@@ -90,11 +92,12 @@ else:
                                          block_miner=block_info["block_miner"],
                                          block_time=block_info["block_time"],
                                          miner_hashrate=miner_data["miner_hashrate"],
-                                         miner_avg_hashrate=miner_data["miner_avg_hashrate"],
+                                         miner_avg_hashrate="Work in progress",
                                          miner_pending_shares=miner_data["miner_pending_shares"],
                                          miner_pending_balance=miner_data["miner_pending_balance"],
                                          miner_total_paid=miner_data["miner_total_paid"],
-                                         miner_contribution=miner_data["miner_contribution"]
+                                         miner_contribution=miner_data["miner_contribution"],
+                                         workers_data=workers_data,
                                          )
         else:
             return flask.redirect(flask.url_for("home"))

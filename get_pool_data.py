@@ -13,19 +13,6 @@ def get_api_data(url=""):
     return data.json()
 
 
-def get_miner_data(address=""):
-    if address == "":
-        miner_url = "{}/{}".format(base_api, "miners")
-        miner_data = requests.get(url=miner_url)
-        miner_data.raise_for_status()
-        return miner_data.json()
-    else:
-        miner_url = "{}/{}/{}".format(base_api, "miners", f"{address}")
-        miner_data = requests.get(url=miner_url)
-        miner_data.raise_for_status()
-        return miner_data.json()
-
-
 class GetPoolData:
     def __init__(self):
         self.id = ""
@@ -35,6 +22,9 @@ class GetPoolData:
         time_obj = time_str[:21]
         time_obj = datetime.datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
         return time_obj.strftime('%Y-%m-%d %H:%M:%S')
+
+    def hash_to_gigahash(self, data):
+        return str(round((float(data) / 1000000000), 3))
 
     def get_stats(self, data_json, arg: str):
         # VALID ARGS:
@@ -72,7 +62,7 @@ class GetPoolData:
 
         # Hashes to Gigahashes
         if arg == "poolHashrate":
-            data = str(round((int(data) / 1000000000), 3))
+            data = self.hash_to_gigahash(data)
 
         return data
 
@@ -105,7 +95,8 @@ class GetPoolData:
         return data
 
     def get_miner_performance(self, address):
-        miner_data = get_miner_data(address)
+        url = "{}/{}/{}".format(base_api, "miners", f"{address}")
+        miner_data = get_api_data(url)
         miner_hashrate = 0
 
         #         miner_hashrate:
@@ -113,7 +104,7 @@ class GetPoolData:
             miner_hashrate += float(miner_data['performance']['workers'][f'{worker}']['hashrate'])
 
         #       hashrate in Gh/s
-        miner_hashrate = round(miner_hashrate / 1e9, 2)
+        miner_hashrate = float(self.hash_to_gigahash(miner_hashrate))
 
         #       miner_avg_hashrate:
         miner_avg_hashrate = "0"
@@ -141,7 +132,8 @@ class GetPoolData:
         return miner_data_display
 
     def get_wallet_stats(self, address):
-        data = get_miner_data()
+        url = '{}/{}'.format(base_api, 'miners')
+        data = get_api_data(url)
         miner_list = []
         for sample in data:
             miner_list.append(sample['miner'])
@@ -156,11 +148,31 @@ class GetPoolData:
         url = "{}/{}".format(base_api, 'blocks')
         block_data = get_api_data(url)
 
+        if block_data[0]['confirmationProgress'] == 0:
+            block_effort = 'Calculating...'
+        else:
+            block_effort = str(round(float(block_data[0]['effort']) * 100, 2))
+
         block_data_display = {'block_status': block_data[0]['status'],
                               'block_progress': str(round(float(block_data[0]['confirmationProgress']) * 100, 2)),
-                              'block_effort': str(round(float(block_data[0]['effort']) * 100, 2)),
+                              'block_effort': block_effort,
                               'block_last_reward': block_data[0]['reward'],
                               'block_miner': (block_data[0]['miner'])[:10] + '...' + (block_data[0]['miner'])[41:],
                               'block_time': self.time_format(block_data[0]['created'])
                               }
         return block_data_display
+
+    def get_workers_stats(self, address):
+        url = '{}/{}/{}'.format(base_api, 'miners', f'{address}')
+        data = get_api_data(url)
+
+        worker_stats = []
+        miner_stats = []
+
+        for worker in data['performance']['workers']:
+            worker_stats = {'name': worker,
+                            'hashrate': self.hash_to_gigahash(data['performance']['workers'][f'{worker}']['hashrate']),
+                            'sharesPerSecond': data['performance']['workers'][f'{worker}']['sharesPerSecond']
+                            }
+            miner_stats.append(worker_stats)
+        return miner_stats
