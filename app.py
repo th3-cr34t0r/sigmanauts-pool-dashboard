@@ -109,4 +109,7 @@ else:
         return render_template("app.html", display_page="get-started.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    if debug:
+        app.run(debug=True)
+    else:
+        app.run()
