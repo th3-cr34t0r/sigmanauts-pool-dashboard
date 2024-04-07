@@ -8,4 +8,4 @@ EXPOSE 8060
 
 ENV FLASK_APP app.py
 
-CMD ["gunicorn", "-w", "4", "--timeout", "2000", "-b", "0.0.0.0:8060", "app:server"]
+CMD ["gunicorn", "-w", "4", "--timeout", "2000", "-b", "0.0.0.0:8060", "app:app"]
