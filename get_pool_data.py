@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+import datetime
 
 base_api = "http://15.204.211.130:4000/api/pools/ErgoSigmanauts"
 
@@ -33,7 +33,7 @@ class GetPoolData:
     def time_format(self, data):
         time_str = data
         time_obj = time_str[:21]
-        time_obj = datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
+        time_obj = datetime.datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
         return time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
     def get_stats(self, data_json, arg: str):
