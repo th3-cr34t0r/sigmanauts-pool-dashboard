@@ -82,7 +82,7 @@ else:
                                    pool_miners=pool_data.get_pool_stats(data_json, "connectedMiners"),
                                    block_found_time="TBI",
                                    pool_effort=pool_data.get_stats(data_json, "poolEffort"),
-                                   block_status=block_info["block_status"],
+                                   pool_total_blocks=pool_data.get_stats(data_json, "totalBlocks"),
                                    block_progress=block_info["block_progress"],
                                    block_effort=block_info["block_effort"],
                                    block_last_reward=block_info["block_last_reward"],

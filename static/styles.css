@@ -24,7 +24,6 @@ body {
 }
 
 .col {
-    max-width: 80rem;
 }
 .row {
     justify-content: center;
@@ -52,6 +51,10 @@ body {
     max-width: 35rem;
     max-height: 100rem;
     margin: 20px;
+}
+
+.card-header {
+   border-color: rgba(74, 63, 53, 0.5);
 }
 
 .card-address {
@@ -92,6 +95,8 @@ body {
     border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
+    min-width: 18rem;
+    max-width: 43rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
 }
@@ -134,8 +139,7 @@ body {
     border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
-    max-width: 26rem;
-    max-height: 21rem;
+    min-width: 18rem;
     margin: 0.5rem;
 }
 
@@ -177,8 +181,7 @@ body {
     border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
-    max-width: 39rem;
-    max-height: 50rem;
+    min-width: 18rem;
     margin: 0.5rem;
 }
 /*********** END OF MAIN ************/

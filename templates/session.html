@@ -1,81 +1,90 @@
-<div class="flex-container">
-    <div class="col">
-        <div class="row">
+<div class="container">
+    <div class="row">
+        <div class="col d-flex justify-content-center">
             <div class="card-address">
                 <div class="card-header">
                     Address:
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>{{ miner_address }}</p>
+                        <p><b>{{ miner_address }}</b></p>
                     </blockquote>
                 </div>
             </div>
         </div>
-        <!--        Network-Pool Stats Row-->
-        <div class="row">
+    </div>
+    <div class="row">
+        <div class="col mb-auto">
             <div class="card-stats">
                 <div class="card-header">
                     Network Stats
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>Hashrate: {{ network_hashrate }} Th/s</p>
-                        <p>Difficulty: {{ network_difficulty }} P</p>
-                        <p>Block Reward: {{ block_reward }}</p>
-                        <p>Block Reward reduction in: {{ block_reduction_time }}</p>
+                        <div class="card-header">Hashrate:<b> {{ network_hashrate }} Th/s</b></div>
+                        <div class="card-header">Difficulty:<b> {{ network_difficulty }} P</b></div>
+                        <div class="card-header">Block Reward:<b> {{ block_reward }}</b></div>
+                        <div class="card-header">Block Reward reduction in:<b> {{ block_reduction_time }}</b></div>
+                        <div class="card-header">ERG price in USD:<b> {{ erg_price_usd }}</b></div>
                     </blockquote>
                 </div>
             </div>
+        </div>
+        <div class="col mb-auto">
             <div class="card-stats">
                 <div class="card-header">
                     Pool Stats
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>Hashrate: {{ pool_hashrate }} Gh/s</p>
-                        <p>Connected Miners: {{ pool_miners }}</p>
-                        <p>Block found every: {{ block_found_time }}</p>
-                        <p>Current Effort: {{ pool_effort }} %</p>
+                        <div class="card-header">Hashrate:<b> {{ pool_hashrate }} Gh/s</b></div>
+                        <div class="card-header">Connected miners:<b> {{ pool_miners }}</b></div>
+                        <div class="card-header">Block found every:<b> {{ block_found_time }}</b></div>
+                        <div class="card-header">Current effort:<b> {{ pool_effort }} %</b></div>
+                        <div class="card-header">Blocks found:<b> {{ pool_total_blocks }}</b></div>
                     </blockquote>
                 </div>
             </div>
+        </div>
+        <div class="col mb-auto">
             <div class="card-stats">
                 <div class="card-header">
                     Last Block Info
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>Status: {{ block_status }}</p>
-                        <p>Confirmation progress: {{ block_progress }} %</p>
-                        <p>Effort: {{ block_effort }} %</p>
-                        <p>Block reward: {{ block_last_reward }} ERG</p>
-                        <p>Mined by: {{ block_miner }}</p>
-                        <p>Time of creation: {{ block_time }}</p>
+                        <div class="card-header">Confirmation progress:<b> {{ block_progress }} %</b></div>
+                        <div class="card-header">Effort:<b> {{ block_effort }} %</b></div>
+                        <div class="card-header">Block reward:<b> {{ block_last_reward }} ERG</b></div>
+                        <div class="card-header">Mined by:<b> {{ block_miner }}</b></div>
+                        <div class="card-header">Created on:<b> {{ block_time }}</b></div>
                     </blockquote>
                 </div>
             </div>
         </div>
-        <!--        Miner Info Row-->
-        <div class="row">
+    </div>
+    <div class="row">
+        <div class="col mb-auto">
             <div class="card-miner">
                 <div class="card-header">
-                    Miner Info
+                    Address Info
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                        <p>Current Hash Rate: {{ miner_hashrate }} Gh/s</p>
-                        <p>Average 24h Hash Rate: {{ miner_avg_hashrate }}</p>
-                        <p>Pending Shares: {{ miner_pending_shares }}</p>
-                        <p>Pending Balance: {{ miner_pending_balance }} ERG</p>
-                        <p>Total Paid: {{ miner_total_paid }} ERG</p>
-                        <p>Round contribution: {{ miner_contribution }} %</p>
+                        <div class="card-header">Current Hash Rate:<b> {{ miner_hashrate }} Gh/s</b></div>
+                        <div class="card-header">Average 24h Hash Rate:<b> {{ miner_avg_hashrate }}</b></div>
+                        <div class="card-header">Pending Shares:<b> {{ miner_pending_shares }}</b></div>
+                        <div class="card-header">Pending Balance:<b> {{ miner_pending_balance }} ERG</b></div>
+                        <div class="card-header">Total Paid:<b> {{ miner_total_paid }} ERG</b></div>
+                        <div class="card-header">Round contribution:<b> {{ miner_contribution }} %</b></div>
                     </blockquote>
                 </div>
             </div>
+        </div>
+        <div class="col mb-auto">
             <div class="card-miner">
                 <div class="card-header">
-                    Address Workers
+                    Workers
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
