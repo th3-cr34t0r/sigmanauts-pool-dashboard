@@ -1,6 +1,4 @@
-version: '0'
 services:
-  pool-ui:
     build:
       context: .
     image: sig-pool-dash:latest
