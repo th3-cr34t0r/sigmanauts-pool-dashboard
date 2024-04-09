@@ -58,8 +58,7 @@ else:
                                          network_hashrate=pool_data.get_network_stats(data_json, "networkHashrate"),
                                          network_difficulty=pool_data.get_network_stats(data_json, "networkDifficulty"),
                                          network_block_height=pool_data.get_network_stats(data_json, "blockHeight"),
-                                         network_last_block_time=pool_data.get_network_stats(data_json,
-                                                                                       "lastNetworkBlockTime"))
+                                         network_last_block_time=pool_data.get_network_stats(data_json, "lastNetworkBlockTime"))
 
 
     @app.route("/wallet/<address>")
@@ -70,7 +69,6 @@ else:
         block_info = pool_data.get_last_block_info()
         miner_data = pool_data.get_wallet_stats(address)
         workers_data = pool_data.get_workers_stats(address)
-
 
         if miner_data != "Miner data not available!":
             return flask.render_template("app.html",
@@ -83,7 +81,7 @@ else:
                                          erg_price_usd="Work in progress",
                                          pool_hashrate=pool_data.get_pool_stats(data_json, "poolHashrate"),
                                          pool_miners=pool_data.get_pool_stats(data_json, "connectedMiners"),
-                                         block_found_time="Work in progress",
+                                         block_found_time=pool_data.calculate_time_to_find_block(pool_data.get_network_stats(data_json, "networkHashrate"), pool_data.get_pool_stats(data_json, "poolHashrate")),
                                          pool_effort=pool_data.get_stats(data_json, "poolEffort"),
                                          pool_total_blocks=pool_data.get_stats(data_json, "totalBlocks"),
                                          block_progress=block_info["block_progress"],

@@ -1,5 +1,6 @@
-import requests
 import datetime
+
+import requests
 
 base_api = "http://15.204.211.130:4000/api/pools/ErgoSigmanauts"
 
@@ -176,3 +177,12 @@ class GetPoolData:
                             }
             miner_stats.append(worker_stats)
         return miner_stats
+
+    def calculate_time_to_find_block(self, network_hashrate, pool_hashrate, block_time=120):
+        # network hashrate from terahashes to hashes
+        network_hashrate = int(network_hashrate) * 1e12
+        # pool hashrate from gigahashes to hashes
+        pool_hashrate = int(pool_hashrate) * 1e9
+        #                                                           h    m    s
+        return ((network_hashrate / pool_hashrate) * block_time) / (24 * 60 * 60)
+

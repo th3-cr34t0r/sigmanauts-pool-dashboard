@@ -80,26 +80,26 @@
                 </div>
                 <div class="card-body">
                     <blockquote class="blockquote mb-0">
-                            <table class="table table-dark table-hover">
-                                <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Hashrate</th>
-                                    <th scope="col">Shares</th>
-                                </tr>
-                                </thead>
-                                {% for worker in workers_data: %}
-                                <tbody>
-                                <tr>
-                                    <th scope="row"></th>
-                                    <td>{{worker['name']}}</td>
-                                    <td>{{worker['hashrate']}} Gh/s</td>
-                                    <td>{{worker['sharesPerSecond']}}</td>
-                                </tr>
-                                </tbody>
-                                {% endfor %}
-                            </table>
+                        <table class="table table-dark table-hover">
+                            <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Hashrate</th>
+                                <th scope="col">Shares</th>
+                            </tr>
+                            </thead>
+                            {% for worker in workers_data: %}
+                            <tbody>
+                            <tr>
+                                <th scope="row"></th>
+                                <td>{{worker['name']}}</td>
+                                <td>{{worker['hashrate']}} Gh/s</td>
+                                <td>{{worker['sharesPerSecond']}}</td>
+                            </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
                     </blockquote>
                 </div>
             </div>
