@@ -180,9 +180,9 @@ class GetPoolData:
 
     def calculate_time_to_find_block(self, network_hashrate, pool_hashrate, block_time=120):
         # network hashrate from terahashes to hashes
-        network_hashrate = int(network_hashrate) * 1e12
+        network_hashrate = float(network_hashrate) * 1e12
         # pool hashrate from gigahashes to hashes
-        pool_hashrate = int(pool_hashrate) * 1e9
+        pool_hashrate = float(pool_hashrate) * 1e9
         #                                                           h    m    s
         return round(((network_hashrate / pool_hashrate) * block_time) / (24 * 60 * 60), 2)
 
