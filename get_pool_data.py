@@ -25,7 +25,7 @@ class GetPoolData:
         return time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
     def hash_to_gigahash(self, data):
-        return str(round((float(data) / 1000000000), 3))
+        return str(round((float(data) / 1e9), 3))
 
     def get_stats(self, data_json, arg: str):
         # VALID ARGS:
@@ -84,11 +84,11 @@ class GetPoolData:
 
         # Hashes to Terahashes
         if arg == 'networkHashrate':
-            data = str(round(float(data) / 1000000000000, 3))
+            data = str(round(float(data) / 1e12, 3))
 
         # to Peta
         elif arg == 'networkDifficulty':
-            data = str(round(float(data) / 1000000000000000, 3))
+            data = str(round(float(data) / 1e15, 3))
 
         elif arg == 'lastNetworkBlockTime':
             data = self.time_format(data)
@@ -184,5 +184,5 @@ class GetPoolData:
         # pool hashrate from gigahashes to hashes
         pool_hashrate = int(pool_hashrate) * 1e9
         #                                                           h    m    s
-        return ((network_hashrate / pool_hashrate) * block_time) / (24 * 60 * 60)
+        return round(((network_hashrate / pool_hashrate) * block_time) / (24 * 60 * 60), 2)
 

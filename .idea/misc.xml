@@ -3,7 +3,7 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (dashSP)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.10 (sigmanauts-pool-dashboard)" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (sigmanauts-pool-dashboard)" project-jdk-type="Python SDK" />
   <component name="PyCharmProfessionalAdvertiser">
     <option name="shown" value="true" />
   </component>
