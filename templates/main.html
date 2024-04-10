@@ -1,67 +1,70 @@
 <div class="flex-container">
     <div class="col">
         <div class="row">
-            <div class="card mb-3">
-                <form class="d-flex" id="search-bar" method="post">
-                    <input class="form-control me-2" name="address" placeholder="Address..." type="text">
-                    <button class="btn btn-search" type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="card mb-3">
-                <div class="card-header"><h4>Pool Stats</h4></div>
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text">
-                        Pool hash-rate: {{ pool_hashrate }} Gh/s <br>
-                        Connected miners: {{ connected_miners }} <br>
-                        Last pool block time: {{ pool_block_time }} <br>
-                        Current block pool effort: {{ pool_effort }}% <br>
-                        <br>
-                    </p>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="card-header"><h4>Network Stats</h4></div>
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p class="card-text">
-                        Network hash-rate: {{ network_hashrate }} Th/s <br>
-                        Network difficulty: {{ network_difficulty }} P <br>
-                        Block height: {{ network_block_height }} <br>
-                        Last network block time: {{ network_last_block_time }} <br>
-                    </p>
+            <div class="container">
+                <div class="card-address">
+                    <div class="card-body">
+                        <form class="d-flex" id="search-bar" method="post">
+                            <input class="form-control me-2" name="address" placeholder="Address..." type="text">
+                            <button class="btn btn-search" type="submit">Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="card mb-3">
-                <div class="card-header"><h4>Pool Info</h4></div>
-                <div class="card-body">
-                    <h5 class="card-title"></h5>
-                    <p>
-                        Payout scheme: {{ payout_scheme }} <br>
-                        Minimum payment threshold: {{ payment_threshold }} Σ <br>
-                        Pool fee: {{ pool_fee }}% <br>
-                        Pool address: {{ pool_address }} <br>
-                    </p>
+            <div class="container">
+                <div class="card-miner">
+                    <div class="card-header"><h4>Pool Stats</h4></div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <div class="card-header">Pool hash-rate: {{ pool_hashrate }} Gh/s</div>
+                            <div class="card-header">Connected miners: {{ connected_miners }}</div>
+                            <div class="card-header">Last pool block time: {{ pool_block_time }}</div>
+                            <div class="card-header">Current block pool effort: {{ pool_effort }}%</div>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="card-miner">
+                    <div class="card-header"><h4>Network Stats</h4></div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <div class="card-header">Network hash-rate: {{ network_hashrate }} Th/s</div>
+                            <div class="card-header">Network difficulty: {{ network_difficulty }} P</div>
+                            <div class="card-header">Block height: {{ network_block_height }}</div>
+                            <div class="card-header">Last network block time: {{ network_last_block_time }}</div>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
-            <div class="card mb-3">
-                <div class="card-header"><h4>How To Connect</h4></div>
-                <div class="card-body">
-                    <h5 class="card-title">Choose a port</h5>
-                    <p class="card-text">
-                        <br>Based on your hashrate and TLS, choose the port that is right for you.<br><br>
-
-                        Port 3052 - Lower than 10GH/s - No TLS<br>
-                        Port 3053 - Higher than 10GH/s - No TLS<br>
-                        Port 3054 - Lower than 10GH/s - TLS<br>
-                        Port 3055 - Higher than 10GH/s - TLS<br><br>
-
-                        Pool URL: <b>pool.ergo-sig-mining.net:PORT</b><br>
-                    </p>
+        </div>
+        <div class="row">
+            <div class="container">
+                <div class="card-miner">
+                    <div class="card-header"><h4>Pool Info</h4></div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <div class="card-header">Payout scheme: {{ payout_scheme }}</div>
+                            <div class="card-header">Minimum payment threshold: {{ payment_threshold }} Σ</div>
+                            <div class="card-header">Pool fee: {{ pool_fee }}%</div>
+                            <div class="card-header">Pool address: {{ pool_address }}</div>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="card-miner">
+                    <div class="card-header"><h4>How To Connect</h4></div>
+                    <div class="card-body">
+                        <h5 class="card-title">Choose a port</h5>
+                        <blockquote class="blockquote mb-0">
+                            <br>Based on your hashrate and TLS, choose the port that is
+                            right for you.<br><br>
+                            Port 3052 - Lower than 10GH/s - No TLS<br>
+                            Port 3053 - Higher than 10GH/s - No TLS<br>
+                            Port 3054 - Lower than 10GH/s - TLS<br>
+                            Port 3055 - Higher than 10GH/s - TLS<br><br>
+                            Pool URL: <b>pool.ergo-sig-mining.net:PORT</b><br>
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>

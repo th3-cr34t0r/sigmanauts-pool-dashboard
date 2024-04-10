@@ -73,7 +73,7 @@ else:
         if miner_data != "Miner data not available!":
             return flask.render_template("app.html",
                                          display_page="session.html",
-                                         miner_address=(address[:19] + "..." + address[33:]),
+                                         miner_address=address,
                                          network_hashrate=pool_data.get_network_stats(data_json, "networkHashrate"),
                                          network_difficulty=pool_data.get_network_stats(data_json, "networkDifficulty"),
                                          block_reward="Work in progress",

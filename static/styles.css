@@ -24,7 +24,7 @@
 }
 
 .navbar-toggler {
-    color: #EEEEEE;
+    background-color: #EEEEEE;
 }
 /*********** END OF NAVBAR ************/
 
@@ -39,15 +39,13 @@ body {
     align-items: center;
 }
 
-.col {
-}
 .row {
     justify-content: center;
 }
 
 
 #search-bar {
-    max-width: 74rem;
+    width: 98%;
     margin: 10px;
 }
 .btn-search {
@@ -111,10 +109,8 @@ body {
     border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
-    min-width: 18rem;
-    max-width: 35rem;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+    width: 100%;
+    margin: 0.5rem;
 }
 
 .card-stats {
@@ -155,8 +151,7 @@ body {
     border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
-    min-width: 18rem;
-    max-width: 35rem;
+    width: 100%;
     margin: 0.5rem;
 }
 
@@ -181,7 +176,7 @@ body {
     --bs-card-img-overlay-padding: 1rem;
     --bs-card-group-margin: 0.75rem;
     position: relative;
-    display: flex;
+    display: fluid;
     flex-direction: column;
     min-width: 0;
     height: var(--bs-card-height);
@@ -198,15 +193,24 @@ body {
     border-color: rgba(255, 67, 1, 0.5);
     border-width: 1px;
 
-    min-width: 18rem;
-    max-width: 35rem;
+    width: 100%;
     margin: 0.5rem;
 }
-
-.table {
-    background-color: rgba(47, 37, 25, 0.7);
+.container {
+    display: flex;
+    justify-content: center;
 }
 
+.custom-table {
+    background-color: rgba(74, 63, 53, 0.3);
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+}
+.custom-tr {
+    border-bottom: 1px solid #FF4301;
+}
 /*********** END OF MAIN ************/
 
 /* Style the video: 100% width and height to cover the entire window */
