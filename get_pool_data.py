@@ -27,6 +27,9 @@ class GetPoolData:
     def hash_to_gigahash(self, data):
         return str(round((float(data) / 1e9), 3))
 
+    def hash_to_megahash(self, data):
+        return str(round((float(data) / 1e6), 3))
+
     def get_stats(self, data_json, arg: str):
         # VALID ARGS:
         # id
@@ -105,7 +108,7 @@ class GetPoolData:
             miner_hashrate += float(miner_data['performance']['workers'][f'{worker}']['hashrate'])
 
         #       hashrate in Gh/s
-        miner_hashrate = float(self.hash_to_gigahash(miner_hashrate))
+        miner_hashrate = float(self.hash_to_megahash(miner_hashrate))
 
         #       miner_avg_hashrate:
         miner_avg_hashrate = "0"
@@ -121,7 +124,8 @@ class GetPoolData:
 
         #       pool contribution in %
         data_json = get_api_data()
-        miner_contribution = round((miner_hashrate / float(self.get_pool_stats(data_json, "poolHashrate")) * 100), 2)
+        miner_contribution = round(
+            (miner_hashrate / (float(self.get_pool_stats(data_json, "poolHashrate")) * 1000) * 100), 2)
 
         miner_data_display = {'miner_hashrate': miner_hashrate,
                               'miner_avg_hashrate': miner_avg_hashrate,
@@ -167,12 +171,11 @@ class GetPoolData:
         url = '{}/{}/{}'.format(base_api, 'miners', f'{address}')
         data = get_api_data(url)
 
-        worker_stats = []
         miner_stats = []
 
         for worker in data['performance']['workers']:
             worker_stats = {'name': worker,
-                            'hashrate': self.hash_to_gigahash(data['performance']['workers'][f'{worker}']['hashrate']),
+                            'hashrate': self.hash_to_megahash(data['performance']['workers'][f'{worker}']['hashrate']),
                             'sharesPerSecond': data['performance']['workers'][f'{worker}']['sharesPerSecond']
                             }
             miner_stats.append(worker_stats)
@@ -185,4 +188,3 @@ class GetPoolData:
         pool_hashrate = float(pool_hashrate) * 1e9
         #                                                                 m    s
         return round(((network_hashrate / pool_hashrate) * block_time) / (60 * 60))
-
