@@ -183,6 +183,6 @@ class GetPoolData:
         network_hashrate = float(network_hashrate) * 1e12
         # pool hashrate from gigahashes to hashes
         pool_hashrate = float(pool_hashrate) * 1e9
-        #                                                           h    m    s
-        return round(((network_hashrate / pool_hashrate) * block_time) / (24 * 60 * 60), 2)
+        #                                                                 m    s
+        return round(((network_hashrate / pool_hashrate) * block_time) / (60 * 60))
 

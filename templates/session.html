@@ -36,7 +36,7 @@
                     <blockquote class="blockquote mb-0">
                         <div class="card-header">Hashrate:<b> {{ pool_hashrate }} Gh/s</b></div>
                         <div class="card-header">Connected miners:<b> {{ pool_miners }}</b></div>
-                        <div class="card-header">Block found every:<b> {{ block_found_time }} days</b></div>
+                        <div class="card-header">Block found every:<b> {{ block_found_time }} hours</b></div>
                         <div class="card-header">Current effort:<b> {{ pool_effort }} %</b></div>
                         <div class="card-header">Blocks found:<b> {{ pool_total_blocks }}</b></div>
                     </blockquote>
@@ -79,28 +79,26 @@
                     Workers
                 </div>
                 <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        <table class="table table-dark table-hover">
-                            <thead>
+                    <table class="table table-dark table-hover">
+                        <thead>
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Hashrate</th>
                                 <th scope="col">Shares</th>
                             </tr>
-                            </thead>
-                            {% for worker in workers_data: %}
-                            <tbody>
+                        </thead>
+                        {% for worker in workers_data: %}
+                        <tbody>
                             <tr>
                                 <th scope="row"></th>
                                 <td>{{worker['name']}}</td>
                                 <td>{{worker['hashrate']}} Gh/s</td>
                                 <td>{{worker['sharesPerSecond']}}</td>
                             </tr>
-                            </tbody>
-                            {% endfor %}
-                        </table>
-                    </blockquote>
+                        </tbody>
+                        {% endfor %}
+                    </table>
                 </div>
             </div>
             <div class="card-miner">

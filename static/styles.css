@@ -3,13 +3,29 @@
     justify-content: center;
     background: rgba(74, 63, 53, 0.7);
 }
+.navbar-nav {
+    display: flex;
+    justify-content: center;
+}
 .nav-link {
     color: #EEEEEE;
+    text-align: center;
 }
 .nav-link:hover {
     color: #FA7D09;
 }
 
+.navbar-brand {
+    color: #EEEEEE;
+}
+
+.navbar-brand:hover {
+    color: #FA7D09;
+}
+
+.navbar-toggler {
+    color: #EEEEEE;
+}
 /*********** END OF NAVBAR ************/
 
 /*********** MAIN ************/
@@ -187,6 +203,9 @@ body {
     margin: 0.5rem;
 }
 
+.table {
+    background-color: rgba(47, 37, 25, 0.7);
+}
 
 /*********** END OF MAIN ************/
 
