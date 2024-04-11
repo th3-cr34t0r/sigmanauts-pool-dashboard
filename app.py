@@ -11,7 +11,7 @@ pool_data = GetPoolData()
 def home():
     if request.method == "POST":
         user_address = request.form["address"]
-        if user_address != "":
+        if len(user_address) == 51:
             return redirect(url_for("wallet", address=user_address))
         else:
             return redirect(url_for("home"))
@@ -35,12 +35,14 @@ def home():
 
 @app.route("/wallet/<address>")
 def wallet(address):
-    data_json = get_api_data()
-    block_info = pool_data.get_last_block_info()
     miner_data = pool_data.get_wallet_stats(address)
-    workers_data = pool_data.get_workers_stats(address)
 
     if miner_data != "Miner data not available!":
+
+        data_json = get_api_data()
+        block_info = pool_data.get_last_block_info()
+        workers_data = pool_data.get_workers_stats(address)
+
         return render_template("app.html",
                                display_page="session.html",
                                miner_address=address,
