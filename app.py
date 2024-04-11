@@ -35,8 +35,6 @@ def home():
 
 @app.route("/wallet/<address>")
 def wallet(address):
-    pool_data = GetPoolData()
-
     data_json = get_api_data()
     block_info = pool_data.get_last_block_info()
     miner_data = pool_data.get_wallet_stats(address)
