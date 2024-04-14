@@ -24,6 +24,9 @@ class GetPoolData:
         time_obj = datetime.datetime.strptime(time_obj, '%Y-%m-%dT%H:%M:%S.%f')
         return time_obj.strftime('%Y-%m-%d %H:%M:%S')
 
+    def hash_to_petahash(selfs, data):
+        return str(round(float(data) / 1e15, 3))
+
     def hash_to_gigahash(self, data):
         return str(round((float(data) / 1e9), 3))
 
@@ -91,7 +94,7 @@ class GetPoolData:
 
         # to Peta
         elif arg == 'networkDifficulty':
-            data = str(round(float(data) / 1e15, 3))
+            data = self.hash_to_petahash(data)
 
         elif arg == 'lastNetworkBlockTime':
             data = self.time_format(data)

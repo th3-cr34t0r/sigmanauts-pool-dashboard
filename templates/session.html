@@ -162,17 +162,17 @@
             </div>
         </div>
 
-    </div>
-    <div class="row">
-        <div class="container">
-            <div class="card-miner">
-                <div class="card-header">
-                    Graph
+        <div class="row">
+            <div class="container">
+                <div class="card-miner">
+                    <div class="card-body">
+                        {% include 'hashrate_chart.html' %}
+                    </div>
                 </div>
-                <div class="card-body">
-                    <blockquote class="blockquote mb-0">
-                        {{ hash_chart }}
-                    </blockquote>
+                <div class="card-miner">
+                    <div class="card-body">
+                        {% include 'diff_chart.html' %}
+                    </div>
                 </div>
             </div>
         </div>

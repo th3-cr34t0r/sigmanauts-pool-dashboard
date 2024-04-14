@@ -1,0 +1,30 @@
+<div>
+    <canvas id="hashrate_chart"></canvas>
+</div>
+
+
+<script>
+    const ctxHashrate = document.getElementById('hashrate_chart');
+
+    new Chart(ctxHashrate, {
+      type: 'line',
+      data: {
+        labels: {{ labels | safe }},
+        datasets: [{
+          label: 'Hashrate',
+          data: {{ hashrate_values | safe }},
+          borderColor: 'rgba(238, 238, 238, 0.93)',
+          tension: 0.2,
+          borderWidth: 2,
+          fill: true
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>

@@ -1,0 +1,31 @@
+<div>
+    <canvas id="diff_chart"></canvas>
+</div>
+
+
+<script>
+    const ctxDiff = document.getElementById('diff_chart');
+
+    new Chart(ctxDiff, {
+      type: 'line',
+      data: {
+        labels: {{ labels | safe }},
+        datasets: [{
+            label: 'Difficulty',
+            data: {{ diff_values | safe }},
+            borderColor: 'rgba(255, 67, 1, 0.8)',
+            hoverBackgroundColor: 'rgba(255, 67, 1, 0.8)',
+            hoverBorderWidth: 5,
+            borderWidth: 2,
+            fill: true
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+</script>
