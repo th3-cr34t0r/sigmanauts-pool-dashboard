@@ -1,15 +1,47 @@
 import pandas as pd
 from flask import Flask, redirect, url_for, render_template, request
+from apscheduler.schedulers.background import BackgroundScheduler
+from collections import deque
 
 app = Flask(__name__)
 
 from get_pool_data import GetPoolData, get_api_data
 from network_data import NetworkStats
+
 pool_data = GetPoolData()
 network_data = NetworkStats()
 
-#save last 100 block infos to csv:
-last_100_block_data = network_data.get_block_data(5)
+# save last 100 block infos to csv:
+# block_stats = network_data.get_block_data(5)
+data_json = get_api_data()
+
+# init a list of 720 elements
+block_stats_list = deque(maxlen=720)
+block_stats_list.append({'height': pool_data.get_network_stats(data_json, 'blockHeight'),
+                         'hashrate': network_data.network_hashrate(),
+                         'difficulty': pool_data.get_network_stats(data_json, 'networkDifficulty'),
+                         })
+
+
+# prev_block_height =  pool_data.get_network_stats(data_json, 'blockHeight'),
+
+def get_block_stats_from_api():
+    data_json = get_api_data()
+    height = pool_data.get_network_stats(data_json, 'blockHeight')
+
+    if block_stats_list[-1]['height'] != height:
+        block_stats_list.append({'height': height,
+                                 'hashrate': network_data.network_hashrate(),
+                                 'difficulty': pool_data.get_network_stats(data_json, 'networkDifficulty'),
+                                 })
+        if len(block_stats_list) > 720:
+            block_stats_list.popleft()
+
+
+# schedule fetching data from api periodically
+scheduler = BackgroundScheduler(daemon=True)
+scheduler.add_job(get_block_stats_from_api, 'interval', minutes=2)
+scheduler.start()
 
 
 @app.route("/", methods=["POST", "GET"])
@@ -21,7 +53,6 @@ def home():
         else:
             return redirect(url_for("home"))
     else:
-
         data_json = get_api_data()
         return render_template("app.html",
                                display_page="main.html",
@@ -33,7 +64,7 @@ def home():
                                payment_threshold=pool_data.get_payment_processing(data_json, "minimumPayment"),
                                pool_fee=pool_data.get_stats(data_json, "poolFeePercent"),
                                pool_address=pool_data.get_stats(data_json, "address"),
-                               network_hashrate=pool_data.get_network_stats(data_json, "networkHashrate"),
+                               network_hashrate=network_data.network_hashrate(),
                                network_difficulty=pool_data.get_network_stats(data_json, "networkDifficulty"),
                                network_block_height=pool_data.get_network_stats(data_json, "blockHeight"),
                                network_last_block_time=pool_data.get_network_stats(data_json, "lastNetworkBlockTime"))
@@ -49,14 +80,16 @@ def wallet(address):
         block_info = pool_data.get_last_block_info()
         workers_data = pool_data.get_workers_stats(address)
 
-        labels = ["11511", "11512", "11513", "11514", "11515", "11516", "11517", "11518"]
-        hashrate_values = [13.52, 13.6, 14.1, 13.63, 14.5, 14.7, 14.6, 15]
-        diff_values = [1.5, 1.5, 1.67, 1.67, 1.74, 1.74, 1.73, 1.8]
+        # get the data and put it to a list for displaying in the charts
+        # get_block_stats_from_api(data_json)
+        labels = [item['height'] for item in block_stats_list]
+        hashrate_values = [item['hashrate'] for item in block_stats_list]
+        diff_values = [item['difficulty'] for item in block_stats_list]
 
         return render_template("app.html",
                                display_page="session.html",
                                miner_address=address,
-                               network_hashrate=pool_data.get_network_stats(data_json, "networkHashrate"),
+                               network_hashrate=network_data.network_hashrate(),
                                network_difficulty=pool_data.get_network_stats(data_json, "networkDifficulty"),
                                block_reward="Work in progress",
                                block_reduction_time="Work in progress",

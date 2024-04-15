@@ -27,6 +27,9 @@ class GetPoolData:
     def hash_to_petahash(selfs, data):
         return str(round(float(data) / 1e15, 3))
 
+    def hash_to_terahash(self, data):
+        return str(round((float(data) / 1e12), 3))
+
     def hash_to_gigahash(self, data):
         return str(round((float(data) / 1e9), 3))
 
