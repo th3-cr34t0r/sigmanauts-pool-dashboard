@@ -1,7 +1,5 @@
 import requests
-import pandas as pd
 import get_pool_data
-import datetime
 
 
 class NetworkStats:
