@@ -1,4 +1,3 @@
-import pandas as pd
 from flask import Flask, redirect, url_for, render_template, request
 from apscheduler.schedulers.background import BackgroundScheduler
 from collections import deque
@@ -19,6 +18,7 @@ data_json = get_api_data()
 with open('block_data.json', 'r') as file:
     data = json.load(file)
     block_stats_list = deque(data, maxlen=720)
+
 
 def get_block_stats_from_api():
     data_json = get_api_data()
