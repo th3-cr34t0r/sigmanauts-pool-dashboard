@@ -1,6 +1,0 @@
-services:
-    build:
-      context: .
-    image: sig-pool-dash:latest
-    ports:
-      - "8060:8060"

@@ -93,7 +93,7 @@ class GetPoolData:
 
         # Hashes to Terahashes
         if arg == 'networkHashrate':
-            data = str(round(float(data) / 1e12, 3))
+            data = round(float(data) / 1e12, 3)
 
         # to Peta
         elif arg == 'networkDifficulty':

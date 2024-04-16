@@ -2,6 +2,7 @@ import pandas as pd
 from flask import Flask, redirect, url_for, render_template, request
 from apscheduler.schedulers.background import BackgroundScheduler
 from collections import deque
+import json
 
 app = Flask(__name__)
 
@@ -12,18 +13,12 @@ pool_data = GetPoolData()
 network_data = NetworkStats()
 
 # save last 100 block infos to csv:
-# block_stats = network_data.get_block_data(5)
 data_json = get_api_data()
 
-# init a list of 720 elements
-block_stats_list = deque(maxlen=720)
-block_stats_list.append({'height': pool_data.get_network_stats(data_json, 'blockHeight'),
-                         'hashrate': network_data.network_hashrate(),
-                         'difficulty': pool_data.get_network_stats(data_json, 'networkDifficulty'),
-                         })
-
-
-# prev_block_height =  pool_data.get_network_stats(data_json, 'blockHeight'),
+# Read data from JSON file to a deque
+with open('block_data.json', 'r') as file:
+    data = json.load(file)
+    block_stats_list = deque(data, maxlen=720)
 
 def get_block_stats_from_api():
     data_json = get_api_data()
@@ -37,10 +32,14 @@ def get_block_stats_from_api():
         if len(block_stats_list) > 720:
             block_stats_list.popleft()
 
+    # Write block data to JSON file
+    with open('block_data.json', 'w') as file:
+        json.dump(list(block_stats_list), file)
+
 
 # schedule fetching data from api periodically
 scheduler = BackgroundScheduler(daemon=True)
-scheduler.add_job(get_block_stats_from_api, 'interval', minutes=2)
+scheduler.add_job(get_block_stats_from_api, 'interval', minutes=1)
 scheduler.start()
 
 
@@ -81,7 +80,6 @@ def wallet(address):
         workers_data = pool_data.get_workers_stats(address)
 
         # get the data and put it to a list for displaying in the charts
-        # get_block_stats_from_api(data_json)
         labels = [item['height'] for item in block_stats_list]
         hashrate_values = [item['hashrate'] for item in block_stats_list]
         diff_values = [item['difficulty'] for item in block_stats_list]

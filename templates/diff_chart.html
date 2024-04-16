@@ -11,12 +11,13 @@
       data: {
         labels: {{ labels | safe }},
         datasets: [{
-            label: 'Difficulty',
+            label: 'Network Difficulty',
             data: {{ diff_values | safe }},
             borderColor: 'rgba(255, 67, 1, 0.8)',
             hoverBackgroundColor: 'rgba(255, 67, 1, 0.8)',
             hoverBorderWidth: 5,
             borderWidth: 2,
+            pointStyle: false,
             fill: true
         }]
       },
