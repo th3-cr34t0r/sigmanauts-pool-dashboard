@@ -77,6 +77,7 @@ def wallet(address):
 
         data_json = get_api_data()
         block_info = pool_data.get_last_block_info()
+        print(block_info)
         workers_data = pool_data.get_workers_stats(address)
 
         # get the data and put it to a list for displaying in the charts

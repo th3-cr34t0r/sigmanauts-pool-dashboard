@@ -4,12 +4,7 @@
             <div class="container">
                 <div class="card-address">
                     <div class="card-header">
-                        Address:
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <p><b>{{ miner_address }}</b></p>
-                        </blockquote>
+                        Address: <b>{{ miner_address }}</b>
                     </div>
                 </div>
             </div>
@@ -163,15 +158,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                {% for block in pool_block_info: %}
                                 <tr class="custom-tr">
-                                    {% for block in pool_block_data: %}
                                     <td>{{ block['block_progress'] }} %</td>
-                                    <td>{{ block['block_effort'] }}</td>
+                                    <td>{{ block['block_effort'] }}%</td>
                                     <td>{{ block['block_last_reward'] }} Σ</td>
                                     <td>{{ block['block_miner'] }}</td>
                                     <td>{{ block['block_time'] }}</td>
-                                    {% endfor %}
                                 </tr>
+                                {% endfor %}
                                 </tbody>
                             </table>
                         </blockquote>
