@@ -159,18 +159,19 @@ class GetPoolData:
         url = "{}/{}".format(base_api, 'blocks')
         block_data = get_api_data(url)
 
-        if block_data[0]['confirmationProgress'] == 0:
-            block_effort = 'Calculating...'
-        else:
-            block_effort = str(round(float(block_data[0]['effort']) * 100, 2))
+        block_data_display = []
+        for block in range(0, 10):
+            if block_data[block]['confirmationProgress'] == 0:
+                block_effort = 'Calculating...'
+            else:
+                block_effort = str(round(float(block_data[block]['effort']) * 100, 2))
 
-        block_data_display = {'block_status': block_data[0]['status'],
-                              'block_progress': str(round(float(block_data[0]['confirmationProgress']) * 100, 2)),
-                              'block_effort': block_effort,
-                              'block_last_reward': block_data[0]['reward'],
-                              'block_miner': (block_data[0]['miner'])[:10] + '...' + (block_data[0]['miner'])[41:],
-                              'block_time': self.time_format(block_data[0]['created'])
-                              }
+            block_data_display.append({'block_progress': str(round(float(block_data[block]['confirmationProgress']) * 100, 2)),
+                                       'block_effort': block_effort,
+                                       'block_last_reward': block_data[block]['reward'],
+                                       'block_miner': (block_data[block]['miner'])[:10] + '...' + (block_data[block]['miner'])[41:],
+                                       'block_time': self.time_format(block_data[block]['created'])
+                                       })
         return block_data_display
 
     def get_workers_stats(self, address):

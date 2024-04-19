@@ -81,39 +81,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="container">
-                <div class="card-stats">
-                    <div class="card-header">
-                        Last Pool Block Info
-                    </div>
-                    <div class="card-body">
-                        <blockquote class="blockquote mb-0">
-                            <table class="custom-table">
-                                <thead>
-                                <tr class="custom-tr">
-                                    <th scope="col">Confirmation progress</th>
-                                    <th scope="col">Effort</th>
-                                    <th scope="col">Block reward</th>
-                                    <th scope="col">Mined by</th>
-                                    <th scope="col">Created on</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="custom-tr">
-                                    <td>{{ block_progress }} %</td>
-                                    <td>{{ block_effort }} %</td>
-                                    <td>{{ block_last_reward }} Σ</td>
-                                    <td>{{ block_miner }}</td>
-                                    <td>{{ block_time }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </blockquote>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!--        Miner Info Row-->
         <div class="row">
             <div class="container">
@@ -172,6 +139,42 @@
                 <div class="card-miner">
                     <div class="card-body">
                         {% include 'diff_chart.html' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        Last 10 Pool Blocks-->
+        <div class="row">
+            <div class="container">
+                <div class="card-stats">
+                    <div class="card-header">
+                        Last 10 Pool Blocks
+                    </div>
+                    <div class="card-body">
+                        <blockquote class="blockquote mb-0">
+                            <table class="custom-table">
+                                <thead>
+                                <tr class="custom-tr">
+                                    <th scope="col">Confirmation progress</th>
+                                    <th scope="col">Effort</th>
+                                    <th scope="col">Block reward</th>
+                                    <th scope="col">Mined by</th>
+                                    <th scope="col">Created on</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="custom-tr">
+                                    {% for block in pool_block_data: %}
+                                    <td>{{ block['block_progress'] }} %</td>
+                                    <td>{{ block['block_effort'] }}</td>
+                                    <td>{{ block['block_last_reward'] }} Σ</td>
+                                    <td>{{ block['block_miner'] }}</td>
+                                    <td>{{ block['block_time'] }}</td>
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </blockquote>
                     </div>
                 </div>
             </div>
